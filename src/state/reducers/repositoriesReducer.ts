@@ -1,5 +1,11 @@
 import { ActionType } from "../action-types";
-import { Action, RepositoriesState } from "../actions";
+import { Action } from "../actions";
+
+export interface RepositoriesState {
+    loading: boolean;
+    error: string | null;
+    data: string[];
+}
 
 const initialState: RepositoriesState = {
     loading: false,
