@@ -7,8 +7,6 @@ const RepositoriesList: React.FC = () => {
     const { searchRepositories } = useActions();
     const { data, loading, error } = useTypedSelector((state) => state.repositories);
 
-    console.log(data);
-
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         searchRepositories(term);
@@ -19,6 +17,15 @@ const RepositoriesList: React.FC = () => {
             <form onSubmit={submitHandler}>
                 <input type="text" value={term} onChange={e => setTerm(e.target.value)} />
                 <button>Search</button>
+                { error && <h2>{error}</h2>}
+                { loading && <h2>Loading...</h2>}
+                { !error && !loading && 
+                    <ol>
+                        {
+                            data.map(item => <li key={item}>{item}</li>)
+                        }
+                    </ol>
+                }
             </form>
         </div>
     );
